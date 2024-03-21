@@ -13,7 +13,7 @@ export function getTaskName(): string {
   return taskName
 }
 
-export function showTaskDetials({ code, msg, ...rest }: TaskResponse): void {
+export function showTaskDetails({ code, msg, ...rest }: TaskResponse): void {
   [`Task message: ${msg}`, 'Task data:', rest, '\n'].map((msg: string | object) => console.log(msg))
 }
 

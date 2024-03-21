@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { getTaskName, handleError, showTaskDetials, showAnswerResponse } from './helpers/utils'
+import { getTaskName, handleError, showTaskDetails, showAnswerResponse } from './helpers/utils'
 import * as aiDevsService from './services/ai-devs'
 
 dotenv.config({ path: './.env' })
@@ -10,7 +10,7 @@ async function main() {
 
   const token = await aiDevsService.getToken(taskName)
   const task = await aiDevsService.getTask(token)
-  showTaskDetials(task)
+  showTaskDetails(task)
 
   const answer = await aiDevsService.resolveTask(taskName, task)
   const answerResponse = await aiDevsService.sendAnswer(token, answer)
