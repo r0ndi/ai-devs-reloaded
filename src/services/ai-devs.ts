@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { tasksConfig } from './tasks-config' 
+import { tasksConfig } from '../helpers/tasks-config' 
 import { AnswerResponse, TaskResponse, TokenResponse } from '../types/remote'
 
 export async function getToken(task: string): Promise<string> {
