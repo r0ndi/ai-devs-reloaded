@@ -1,0 +1,21 @@
+{
+  "name": "ai-devs-reloaded",
+  "version": "1.0.0",
+  "main": "src/boot.ts",
+  "scripts": {
+    "start": "ts-node src/boot.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.11.28",
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "minimist": "^1.2.8",
+    "openai": "^4.29.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  }
+}
