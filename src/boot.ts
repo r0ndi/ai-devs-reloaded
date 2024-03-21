@@ -1,6 +1,3 @@
-#!/usr/bin/env node
-'use strict'
-
 import dotenv from 'dotenv'
 import { getTaskName, handleError, showTaskDetials, showAnswerResponse } from './helpers/utils'
 import * as aiDevsService from './services/ai-devs'
