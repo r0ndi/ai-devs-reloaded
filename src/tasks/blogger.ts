@@ -16,10 +16,10 @@ export async function blogger({ blog }: BloggerData): Promise<string[]> {
 
   for (const sentence of blog) {
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: 'gpt-3.5-turbo',
       messages: [
-        { role: "system", content: systemContext },
-        { role: "user", content: sentence },
+        { role: 'system', content: systemContext },
+        { role: 'user', content: sentence },
       ],
     })
     response.push(completion.choices[0].message.content as string)
