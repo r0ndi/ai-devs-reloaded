@@ -14,13 +14,14 @@ export async function getTask(token: string): Promise<TaskResponse> {
   return { ...data, token }
 }
 
-export async function sendParamsToTask(token: string, params: URLSearchParams): Promise<TaskAnswerResponse> {
-  const { data } = await axios.post<TaskAnswerResponse>(`${process.env.AI_DEVS_API_URL}/task/${token}`, params)
+export async function sendTaskParams(token: string, params: Record<string, string>): Promise<TaskAnswerResponse> {
+  const urlParms = new URLSearchParams(params)
+  const { data } = await axios.post<TaskAnswerResponse>(`${process.env.AI_DEVS_API_URL}/task/${token}`, urlParms)
   return data
 }
 
-export async function sendAnswer(token: string, answer: unknown): Promise<AnswerResponse> {
-  const { data } = await axios.post(`${process.env.AI_DEVS_API_URL}/answer/${token}`, { answer })
+export async function sendTaskAnswer(token: string, answer: unknown): Promise<AnswerResponse> {
+  const { data } = await axios.post<AnswerResponse>(`${process.env.AI_DEVS_API_URL}/answer/${token}`, { answer })
   return data
 }
 

@@ -13,7 +13,7 @@ async function main() {
   showTaskDetails(task)
 
   const answer = await aiDevsService.resolveTask(taskName, task)
-  const answerResponse = await aiDevsService.sendAnswer(token, answer)
+  const answerResponse = await aiDevsService.sendTaskAnswer(token, answer)
   showAnswerResponse(answerResponse)
 }
 

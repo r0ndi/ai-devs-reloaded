@@ -8,8 +8,7 @@ export async function liar({ token }: TaskResponse): Promise<string> {
 }
 
 async function sendQuestion(token: string): Promise<string> {
-  const formParms = new URLSearchParams({ question: 'What is capital of Poland?'})
-  const { answer } = await aiDevsService.sendParamsToTask(token, formParms)
+  const { answer } = await aiDevsService.sendTaskParams(token, { question: 'What is capital of Poland?' })
   return answer
 }
 
