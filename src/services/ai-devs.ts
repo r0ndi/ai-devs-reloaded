@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { tasksConfig } from '../helpers/tasks-config' 
+import { getTasksConfig } from '../helpers/tasks-config' 
 import { AnswerResponse, TaskResponse, TokenResponse } from '../types/remote'
 
 export async function getToken(task: string): Promise<string> {
@@ -20,9 +20,9 @@ export async function sendAnswer(token: string, answer: unknown): Promise<Answer
 }
 
 export async function resolveTask(task: string, response: TaskResponse): Promise<unknown> {
-  const taskFn = tasksConfig[task]
-  if (!taskFn) {
+  const tasksFns = await getTasksConfig()
+  if (!tasksFns[task]) {
     throw new Error(`Not found resolver for ${task}`)
   }
-  return taskFn(response)
+  return tasksFns[task](response)
 }
