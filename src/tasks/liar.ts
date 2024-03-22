@@ -1,6 +1,6 @@
 import * as aiDevsService from '../services/ai-devs'
+import * as openaiService from '../services/openai'
 import { TaskResponse } from '../types/remote'
-import { sendCompletions } from '../services/openai'
 
 export async function liar({ token }: TaskResponse): Promise<string> {
   const answer = await sendQuestion(token)
@@ -15,6 +15,6 @@ async function sendQuestion(token: string): Promise<string> {
 async function checkAnswerIsTruth(answer: string): Promise<string> {
   const systemContext = '### Role: Assistant who answers whether the information provided'
     + ' by the user is related to the topic of country capitals. Return YES or NO'
-  const response = await sendCompletions(systemContext, answer)
+  const response = await openaiService.sendCompletions(systemContext, answer)
   return ['YES', 'NO'].includes(response) ? response : 'NO'
 }
