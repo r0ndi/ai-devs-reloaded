@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { getTasksConfig } from '../helpers/tasks-config' 
-import { AnswerResponse, TaskResponse, TokenResponse } from '../types/remote'
+import { AnswerResponse, TaskAnswerResponse, TaskResponse, TokenResponse } from '../types/remote'
 
 export async function getToken(task: string): Promise<string> {
   const { data: { token } } = await axios.post<TokenResponse>(
@@ -11,6 +11,11 @@ export async function getToken(task: string): Promise<string> {
 
 export async function getTask(token: string): Promise<TaskResponse> {
   const { data } = await axios.get<TaskResponse>(`${process.env.AI_DEVS_API_URL}/task/${token}`)
+  return { ...data, token }
+}
+
+export async function sendParamsToTask(token: string, params: URLSearchParams): Promise<TaskAnswerResponse> {
+  const { data } = await axios.post<TaskAnswerResponse>(`${process.env.AI_DEVS_API_URL}/task/${token}`, params)
   return data
 }
 

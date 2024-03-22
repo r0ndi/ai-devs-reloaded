@@ -3,9 +3,16 @@ export type TokenResponse = {
 }
 
 export type TaskResponse = {
+  token: string
   code: number
   msg: string
   [key: string]: unknown
+}
+
+export type TaskAnswerResponse = {
+  code: number
+  msg: string
+  answer: string
 }
 
 export type AnswerResponse = {
