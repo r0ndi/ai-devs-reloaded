@@ -1,6 +1,7 @@
-import { AnswerResponse, TaskResponse } from "../types/remote"
+import { ErrorHandler } from '../types/local'
+import { AnswerResponse, TaskResponse } from '../types/remote'
 
-export function handleError(error: any): void {
+export function handleError(error: ErrorHandler): void {
   console.error(`Error: ${error.response?.data?.msg || error.message}`)
 }
 
