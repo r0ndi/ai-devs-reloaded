@@ -1,6 +1,7 @@
 import dotenv from 'dotenv'
-import { getTaskName, handleError, showTaskDetails, showAnswerResponse } from './helpers/utils'
 import * as aiDevsService from './services/ai-devs'
+import { handleError, showTaskDetails, showAnswerResponse } from './helpers/utils'
+import { getTaskName } from './helpers/tasks'
 
 dotenv.config({ path: './.env' })
 process.on('unhandledRejection', handleError)

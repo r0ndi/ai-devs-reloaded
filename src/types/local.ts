@@ -1,6 +1,6 @@
-export type TasksConfig = {
-  [key: string]: (data: any) => Promise<unknown>
-}
+import { TaskResponse } from './remote'
+
+export type TaskResolver = (data: TaskResponse) => Promise<unknown>
 
 export type ErrorHandler = {
   response?: { data?: { msg: string }}
