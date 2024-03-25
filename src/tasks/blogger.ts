@@ -5,7 +5,7 @@ type BloggerData = TaskResponse & {
   blog: string[]
 }
 
-export async function blogger({ blog }: BloggerData): Promise<string[]> {
+export async function handler({ blog }: BloggerData): Promise<string[]> {
   return Promise.all(blog.map(createCompletions))
 }
 

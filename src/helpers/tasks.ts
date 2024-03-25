@@ -8,8 +8,8 @@ export async function getTaskResolver(taskName: string): Promise<TaskResolver | 
     return
   }
 
-  const taskModule = require(taskPath)
-  return taskModule && taskModule[taskName]
+  const { handler } = require(taskPath)
+  return handler
 }
 
 export function getTaskName(): string {

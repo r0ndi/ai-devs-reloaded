@@ -6,7 +6,7 @@ type ModerationData = TaskResponse & {
   input: string[]
 }
 
-export async function moderation({ input = [] }: ModerationData): Promise<number[]> {
+export async function handler({ input = [] }: ModerationData): Promise<number[]> {
   const results = await openaiService.moderateInputs(input)
   return results.map(({ flagged }: Moderation) => flagged ? 1 : 0)
 }

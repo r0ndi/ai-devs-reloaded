@@ -2,7 +2,7 @@ import * as aiDevsService from '../services/ai-devs'
 import * as openaiService from '../services/openai'
 import { TaskResponse } from '../types/remote'
 
-export async function liar({ token }: TaskResponse): Promise<string> {
+export async function handler({ token }: TaskResponse): Promise<string> {
   const answer = await sendQuestion(token)
   return checkAnswerIsTruth(answer)
 }
