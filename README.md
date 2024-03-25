@@ -19,7 +19,7 @@ Unofficial CLI for AI Devs
 
 ## Adding a new task
 1. Add a new `.ts` file to the `src/tasks` directory matching the task name, e.g. `helloapi.ts`.
-2. In the new file add resolver function with name "handler" like `export function handler(data: TaskResponse): Promise<unknown> {}` witch return task answer. Look (example)[https://github.com/r0ndi/ai-devs-reloaded/blob/main/src/tasks/helloapi.ts].
+2. In the new file add resolver function with name "handler" like `export function handler(data: TaskResponse): Promise<unknown> {}` witch return task answer. Look [example](https://github.com/r0ndi/ai-devs-reloaded/blob/main/src/tasks/helloapi.ts).
 3. Implement the body of the function
 4. Run the task using `npm start -- taskName`, e.g. `npm start -- helloapi`
 
