@@ -1,3 +1,4 @@
+import fs from 'fs'
 import OpenAI from 'openai'
 import { Moderation } from 'openai/resources'
 
@@ -22,4 +23,12 @@ export async function moderateInputs(input: string[]): Promise<Moderation[]> {
 export async function getEmbeddings(input: string, model: string = 'text-embedding-3-small'): Promise<number[]> {
   const embedding = await (new OpenAI()).embeddings.create({ input, model })
   return embedding.data[0].embedding || []
+}
+
+export async function getTranscription(filePath: string, model: string = 'whisper-1'): Promise<string> {
+  const { text } = await (new OpenAI()).audio.transcriptions.create({
+    file: fs.createReadStream(filePath),
+    model,
+  })
+  return text
 }
