@@ -12,3 +12,7 @@ export function showTaskDetails({ code, msg, ...rest }: TaskResponse): void {
 export function showAnswerResponse({ code, note, msg }: AnswerResponse): void {
   [`Answer code: ${code}`, `Answer note: ${note}`, `Answer message: ${msg}`].map((msg: string) => console.log(msg))
 }
+
+export function showAnswer(answer: unknown): void {
+  console.log('Answer:\n', answer, '\n')
+}
