@@ -8,7 +8,7 @@ type FunctionCall = {
   }
 }
 
-export async function handler(): Promise<FunctionCall> {
+export function handler(): FunctionCall {
   return {
     name: 'addUser',
     description: 'Classify user to add',

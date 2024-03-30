@@ -4,6 +4,6 @@ type HelloApiData = TaskResponse & {
   cookie: string
 }
 
-export async function handler({ cookie }: HelloApiData): Promise<string> {
+export function handler({ cookie }: HelloApiData): string {
   return cookie
 }
