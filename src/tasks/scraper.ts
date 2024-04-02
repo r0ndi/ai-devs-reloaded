@@ -5,7 +5,7 @@ import axios, { AxiosError } from 'axios'
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'
 const MAX_ATTEMPTS = 5
 
-type ScrapperData = TaskResponse & {
+type ScraperData = TaskResponse & {
   question: string
   input: string
 }
@@ -15,7 +15,7 @@ type FileContent = {
   success: boolean
 }
 
-export async function handler({ question, input }: ScrapperData): Promise<unknown> {
+export async function handler({ question, input }: ScraperData): Promise<unknown> {
   const { content, success } = await getFileContent(input)
   if (!success) {
     throw new Error(content)
