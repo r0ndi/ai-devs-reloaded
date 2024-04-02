@@ -38,7 +38,7 @@ async function getFileContent(url: string, attempt: number = 0): Promise<FileCon
   } catch (error: unknown) {
     const { message } = error as AxiosError
     return attempt > MAX_ATTEMPTS
-      ? { content: `Error durring file fetching: ${message}. Run again!`, success: false }
+      ? { content: `Error during file fetching: ${message}. Run again!`, success: false }
       : getFileContent(url, ++attempt)
   }
 }
