@@ -10,11 +10,6 @@ type ScraperData = TaskResponse & {
   input: string
 }
 
-type FileContent = {
-  content: string
-  success: boolean
-}
-
 export async function handler({ question, input: fileUrl }: ScraperData): Promise<string> {
   const context = await getFileContent(fileUrl)
   const humanMessage = `Question: ${question}`
