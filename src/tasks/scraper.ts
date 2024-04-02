@@ -15,7 +15,7 @@ type FileContent = {
   success: boolean
 }
 
-export async function handler({ question, input }: ScraperData): Promise<unknown> {
+export async function handler({ question, input }: ScraperData): Promise<string> {
   const { content, success } = await getFileContent(input)
   if (!success) {
     throw new Error(content)
