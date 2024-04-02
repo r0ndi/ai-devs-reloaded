@@ -2,7 +2,7 @@ import * as langchainService from '../services/langchain'
 import { TaskResponse } from '../types/remote'
 import axios, { AxiosError } from 'axios'
 
-const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'
 const MAX_ATTEMPTS = 5
 
 type ScrapperData = TaskResponse & {
@@ -33,7 +33,7 @@ export async function handler({ question, input }: ScrapperData): Promise<unknow
 
 async function getFileContent(url: string, attempt: number = 0): Promise<FileContent> {
   try {
-    const { data } = await axios.get(url, { headers: { 'User-Agent': userAgent } })
+    const { data } = await axios.get(url, { headers: { 'User-Agent': USER_AGENT } })
     return { content: data, success: true }
   } catch (error: unknown) {
     const { message } = error as AxiosError
