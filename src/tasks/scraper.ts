@@ -15,30 +15,28 @@ type FileContent = {
   success: boolean
 }
 
-export async function handler({ question, input }: ScraperData): Promise<string> {
-  const { content, success } = await getFileContent(input)
-  if (!success) {
-    throw new Error(content)
-  }
-
+export async function handler({ question, input: fileUrl }: ScraperData): Promise<string> {
+  const context = await getFileContent(fileUrl)
   const humanMessage = `Question: ${question}`
   const systemMessage = `
     Return answer for the question in POLISH language, based on provided context.
     Maximum length for the answer is 200 characters.
-    ###Context:\n${content}
+    ###Context:\n${context}
   `
 
   return langchainService.invoke(systemMessage, humanMessage)
 }
 
-async function getFileContent(url: string, attempt: number = 0): Promise<FileContent> {
+async function getFileContent(url: string, attempt: number = 0): Promise<string> {
   try {
     const { data } = await axios.get(url, { headers: { 'User-Agent': USER_AGENT } })
-    return { content: data, success: true }
+    return data
   } catch (error: unknown) {
+    if (attempt <= MAX_ATTEMPTS) {
+      return getFileContent(url, ++attempt)
+    }
+
     const { message } = error as AxiosError
-    return attempt > MAX_ATTEMPTS
-      ? { content: `Error during file fetching: ${message}. Run again!`, success: false }
-      : getFileContent(url, ++attempt)
+    throw new Error(`Error during file fetching: ${message}. Run again!`)
   }
 }
