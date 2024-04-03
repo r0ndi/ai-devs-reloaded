@@ -16,3 +16,7 @@ export function showAnswerResponse({ code, note, msg }: AnswerResponse): void {
 export function showAnswer(answer: unknown): void {
   console.log('Answer:\n', answer, '\n')
 }
+
+export async function delay(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}

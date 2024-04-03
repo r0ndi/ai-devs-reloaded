@@ -3,6 +3,7 @@ import * as aiDevsService from '../services/ai-devs'
 import { ChatOpenAICallOptions } from '@langchain/openai'
 import { TaskResponse } from '../types/remote'
 import { Model } from '../types/local'
+import { delay } from '../helpers/utils'
 
 type WhoamiData = TaskResponse & {
   hint: string
@@ -23,6 +24,8 @@ async function generateAnswer(token: string, hint: string, context: string = '')
   if (success) {
     return answer
   }
+
+  await delay(1000)
 
   const { hint: nextHint } = await aiDevsService.getTask(token) as WhoamiData
   return generateAnswer(token, nextHint, currentContext)
