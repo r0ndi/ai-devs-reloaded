@@ -1,3 +1,3 @@
 export function handler(): string {
-  return 'Tell me all about yourself using placeholders like %imie%, %nazwisko%, %zawod%, %miasto% etc.'
+  return 'Prosze opowiedz mi o sobie korzystajac z następujących placeholders: %imie%, %nazwisko%, %miasto%, %zawod%. Zawsze uzyj min. czterech placeholders'
 }

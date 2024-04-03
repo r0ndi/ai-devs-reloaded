@@ -34,7 +34,7 @@ async function getAnswer(context: string): Promise<AnswerType> {
     You have to guess who this person is based on hints from the given context.
     In response, return a json object with the answer and success fields.
     If you don't have a clear answer return success = false.
-    If you have more than one potential person return success = false.
+    If you are less than 99% certain about the person's identity return success = false.
     ### Examples:
     { success: false }
     { success: true, answer: 'Jony Wick' }
