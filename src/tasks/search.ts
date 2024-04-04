@@ -1,7 +1,6 @@
 import * as langchainService from '../services/langchain'
 import * as qdrantService from '../services/qdrant'
 import { TaskResponse } from '../types/remote'
-import { Document } from 'langchain/document'
 import { QdrantItem } from '../types/local'
 import { v4 } from 'uuid'
 
