@@ -15,23 +15,26 @@ type AnswerType = {
 }
 
 export async function handler({ hint, token }: WhoamiData): Promise<string> {
-  return generateAnswer(token, hint)
+  return generateAnswer(token, [hint])
 }
 
-async function generateAnswer(token: string, hint: string, context: string = ''): Promise<string> {
-  const currentContext = `${context}\n- ${hint}`
-  const { success, answer } = await getAnswer(currentContext)
+async function generateAnswer(token: string, hints: string[]): Promise<string> {
+  const { success, answer } = await getAnswer(hints)
   if (success) {
     return answer
   }
 
   await delay(1000)
-
-  const { hint: nextHint } = await aiDevsService.getTask(token) as WhoamiData
-  return generateAnswer(token, nextHint, currentContext)
+  const newHints = await getHints(token, hints)
+  return generateAnswer(token, newHints)
 }
 
-async function getAnswer(context: string): Promise<AnswerType> {
+async function getHints(token: string, hints: string[]): Promise<string[]> {
+  const { hint } = await aiDevsService.getTask(token) as WhoamiData
+  return [...hints, hint]
+}
+
+async function getAnswer(hints: string[]): Promise<AnswerType> {
   const systemMessage = `
     ### Instructions:
     You have to guess who this person is based on hints from the given context.
@@ -41,7 +44,7 @@ async function getAnswer(context: string): Promise<AnswerType> {
     ### Examples:
     { success: false }
     { success: true, answer: 'Jony Wick' }
-    ### Context: ${context}
+    ### Context:\n${hints.join('\n')}
   `
 
   const options: ChatOpenAICallOptions = { response_format: { type: 'json_object' } }
