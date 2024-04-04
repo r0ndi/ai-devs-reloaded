@@ -1,3 +1,4 @@
 node_modules
+qdrant_storage
 build
 .env
