@@ -3,7 +3,6 @@ import * as qdrantService from '../services/qdrant'
 import { TaskResponse } from '../types/remote'
 import { Document } from 'langchain/document'
 import { QdrantItem } from '../types/local'
-import axios, { AxiosError } from 'axios'
 import { v4 } from 'uuid'
 
 type SearchData = TaskResponse & {
@@ -21,8 +20,8 @@ type SearchItem = {
   payload: { url: string }
 }
 
-const NEWS_URL = 'https://unknow.news/archiwum_aidevs.json'
 const COLLECTION_NAME = 'news'
+const NEWS_URL = 'https://unknow.news/archiwum_aidevs.json'
 
 export async function handler({ question }: SearchData): Promise<string> {
   const client = qdrantService.createClient()
@@ -33,8 +32,8 @@ export async function handler({ question }: SearchData): Promise<string> {
 
   if (await qdrantService.isEmptyCollection(client, COLLECTION_NAME)) {
     const news = await getNews()
-    const documents = await prepareQdrantItems(news)
-    await qdrantService.upsertItems(client, COLLECTION_NAME, documents)
+    const items = await prepareQdrantItems(news)
+    await qdrantService.upsertItems(client, COLLECTION_NAME, items)
   }
 
   const queryEmbedding = await langchainService.getEmbedding(question)
@@ -52,15 +51,11 @@ async function prepareQdrantItems(news: News[]): Promise<QdrantItem[]> {
       vector: await langchainService.getEmbedding(document.pageContent),
     }
   }
+
   return Promise.all(news.map(prepareItem))
 }
 
 async function getNews(): Promise<News[]> {
-  try {
-    const { data } = await axios.get(NEWS_URL)
-    return data as News[]
-  } catch (error: unknown) {
-    const { message } = error as AxiosError
-    throw new Error(`Error during file fetching: ${message}. Run again!`)
-  }
+  const response = await fetch(NEWS_URL)
+  return response.json()
 }
