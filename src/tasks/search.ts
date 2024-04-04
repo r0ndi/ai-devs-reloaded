@@ -44,7 +44,8 @@ export async function handler({ question }: SearchData): Promise<string> {
 
 async function prepareQdrantItems(news: News[]): Promise<QdrantItem[]> {
   const prepareItem = async ({ info, url, title }: News): Promise<QdrantItem> => {
-    const document = new Document({ pageContent: info })
+    const pageContent = `Title: ${title}, ${info}`
+    const document = new Document({ pageContent })
     return {
       id: v4(),
       payload: { ...document.metadata, content: info, title, url },
