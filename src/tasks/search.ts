@@ -42,15 +42,11 @@ export async function handler({ question }: SearchData): Promise<string> {
 }
 
 async function prepareQdrantItems(news: News[]): Promise<QdrantItem[]> {
-  const prepareItem = async ({ info, url, title }: News): Promise<QdrantItem> => {
-    const pageContent = `Title: ${title}, ${info}`
-    const document = new Document({ pageContent })
-    return {
-      id: v4(),
-      payload: { ...document.metadata, content: info, title, url },
-      vector: await langchainService.getEmbedding(document.pageContent),
-    }
-  }
+  const prepareItem = async ({ info, url, title }: News): Promise<QdrantItem> => ({
+    vector: await langchainService.getEmbedding(`Title: ${title}, ${info}`),
+    payload: { content: info, title, url },
+    id: v4(),
+  })
 
   return Promise.all(news.map(prepareItem))
 }
