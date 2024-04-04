@@ -38,8 +38,8 @@ export async function handler({ question }: SearchData): Promise<string> {
   }
 
   const queryEmbedding = await langchainService.getEmbedding(question)
-  const { payload: { url } } = await qdrantService.searchItem<SearchItem>(client, COLLECTION_NAME, queryEmbedding)
-  return url || ''
+  const response = await qdrantService.searchItem<SearchItem>(client, COLLECTION_NAME, queryEmbedding)
+  return response.payload.url || ''
 }
 
 async function prepareQdrantItems(news: News[]): Promise<QdrantItem[]> {
