@@ -6,9 +6,7 @@ import { v4 } from 'uuid'
 import * as R from 'ramda'
 import { delay } from '../helpers/utils'
 
-type SearchData = TaskResponse & {
-  question: string
-}
+type PeopleData = TaskResponse & { question: string }
 
 type People = {
   imie: string
@@ -30,7 +28,7 @@ const BATCH_DELAY = 1_000
 const COLLECTION_NAME = 'people'
 const PEOPLE_DATA_URL = 'https://tasks.aidevs.pl/data/people.json'
 
-export async function handler({ question }: SearchData): Promise<string> {
+export async function handler({ question }: PeopleData): Promise<string> {
   const client = qdrantService.createClient()
 
   if (!await qdrantService.isCollectionExists(client, COLLECTION_NAME)) {
