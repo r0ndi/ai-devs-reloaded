@@ -11,14 +11,18 @@
   "dependencies": {
     "@langchain/openai": "^0.0.23",
     "@qdrant/js-client-rest": "^1.8.1",
-    "@types/axios": "^0.14.0",
-    "@types/node": "^20.11.28",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "langchain": "^0.1.30",
     "openai": "^4.29.2",
+    "ramda": "^0.29.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.2",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.29.12",
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.11.28"
   }
 }
