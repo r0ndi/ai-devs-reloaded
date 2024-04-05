@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@langchain/openai": "^0.0.23",
-    "@qdrant/js-client-rest": "^1.8.1",
+    "@qdrant/js-client-rest": "^1.7.0",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "langchain": "^0.1.30",
@@ -21,8 +21,8 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/ramda": "^0.29.12",
     "@types/axios": "^0.14.0",
-    "@types/node": "^20.11.28"
+    "@types/node": "^20.11.28",
+    "@types/ramda": "^0.29.12"
   }
 }
