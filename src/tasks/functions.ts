@@ -1,12 +1,4 @@
-type FunctionCall = {
-  name: string
-  description: string
-  parameters: {
-    type: string
-    required: string[]
-    properties: Record<string, { type: string, description: string }>
-  }
-}
+import { FunctionCall } from '../types/local'
 
 export function handler(): FunctionCall {
   return {

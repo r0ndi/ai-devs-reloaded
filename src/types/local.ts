@@ -21,3 +21,18 @@ export type QdrantItem = {
   payload: Record<string, string>
   vector: number[]
 }
+
+export type FunctionCall = {
+  name: string
+  description: string
+  parameters: {
+    type: string
+    required: string[]
+    properties: Record<string, { type: string, description: string }>
+  }
+}
+
+export type FunctionCallResponse = {
+  name: string
+  args: Record<string, unknown>
+} | null

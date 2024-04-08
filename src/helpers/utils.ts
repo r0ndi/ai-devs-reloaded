@@ -1,4 +1,5 @@
-import { ErrorHandler } from '../types/local'
+import { BaseMessageChunk } from 'langchain/schema'
+import { ErrorHandler, FunctionCallResponse } from '../types/local'
 import { AnswerResponse, TaskResponse } from '../types/remote'
 
 export function handleError(error: ErrorHandler): void {
@@ -19,4 +20,11 @@ export function showAnswer(answer: unknown): void {
 
 export async function delay(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+export function parseFunctionCall({ additional_kwargs }: BaseMessageChunk): FunctionCallResponse {
+  return additional_kwargs && additional_kwargs.function_call ? {
+    args: JSON.parse(additional_kwargs.function_call.arguments),
+    name: additional_kwargs.function_call.name,
+  } : null
 }
