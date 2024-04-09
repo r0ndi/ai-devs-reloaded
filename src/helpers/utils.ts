@@ -28,3 +28,7 @@ export function parseFunctionCall({ additional_kwargs }: BaseMessageChunk): Func
     name: additional_kwargs.function_call.name,
   } : null
 }
+
+export function getCurrentDate(): string {
+  return new Date().toISOString().slice(0, 10)
+}

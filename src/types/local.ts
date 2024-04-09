@@ -28,7 +28,7 @@ export type FunctionCall = {
   parameters: {
     type: string
     required: string[]
-    properties: Record<string, { type: string, description: string }>
+    properties: Record<string, { type: string, description: string, enum?: string[] }>
   }
 }
 
