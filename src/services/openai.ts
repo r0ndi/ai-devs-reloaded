@@ -33,3 +33,21 @@ export async function getTranscription(filePath: string, model: string = Model.W
   })
   return text
 }
+
+export async function invokeImageDetector(
+  humanMessage: string, url: string, model: Model = Model.GPT_4_TURBO,
+): Promise<string> {
+  const completion = await (new OpenAI()).chat.completions.create({
+    model,
+    messages: [
+      {
+        role: 'user',
+        content: [
+          { type: 'text', text: humanMessage },
+          { type: 'image_url', image_url: { url } },
+        ]
+      },
+    ],
+  })
+  return (completion.choices[0].message.content || '').trim()
+}
