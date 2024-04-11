@@ -19,7 +19,6 @@ async function createApiServer(): Promise<string> {
 
 async function createExpressServer(): Promise<Express> {
   const app = express()
-  app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
   app.post(CONVERSATION_ENDPOINT, assistantConversation)
   return app
