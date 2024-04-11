@@ -10,9 +10,12 @@
   "license": "ISC",
   "dependencies": {
     "@langchain/openai": "^0.0.23",
+    "@ngrok/ngrok": "^1.2.0",
     "@qdrant/js-client-rest": "^1.7.0",
     "axios": "^1.6.8",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "langchain": "^0.1.30",
     "openai": "^4.29.2",
     "ramda": "^0.29.1",
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/express": "^4.17.21",
     "@types/node": "^20.11.28",
     "@types/ramda": "^0.29.12"
   }
