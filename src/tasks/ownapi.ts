@@ -7,7 +7,7 @@ import ngrok from '@ngrok/ngrok'
 
 const CONVERSATION_ENDPOINT = '/api/assistant/conversation'
 
-export async function handler(_: TaskResponse): Promise<any> {
+export async function handler(_: TaskResponse): Promise<string> {
   const serverUrl = await createApiServer()
   return `${serverUrl}${CONVERSATION_ENDPOINT}`
 }
