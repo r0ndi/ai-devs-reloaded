@@ -26,7 +26,7 @@ async function createExpressServer(): Promise<Express> {
 
 async function createNgrokServer(app: Express): Promise<string> {
   const session = await new ngrok.SessionBuilder().authtokenFromEnv().connect()
-  const listener = await session.httpEndpoint().requestHeader("X-Req-Yup", "true").listen()
+  const listener = await session.httpEndpoint().listen()
   ngrok.listen(app as any, listener)
   return listener.url() || ''
 }
