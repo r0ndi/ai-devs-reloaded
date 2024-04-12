@@ -41,8 +41,8 @@ async function assistantConversation(req: Request, res: Response): Promise<void>
   ) as unknown as CategorizePharseArgs
 
   await delay(1000)
-  const resolver = { 'knowledge': saveToDatabase, 'question': answerQuestion }[type || '']
-  const response = resolver && await resolver(message)
+  const resolverFn = { 'knowledge': saveToDatabase, 'question': answerQuestion }[type]
+  const response = resolverFn && await resolverFn(message)
   res.send({ reply: response }).status(200)
 }
 
