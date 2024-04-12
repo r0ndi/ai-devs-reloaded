@@ -56,7 +56,7 @@ async function answerQuestion(question: string): Promise<string> {
     Answer the question very clearly, concise and in Polish based on provided context.
     ### Context: ${customerKnowledge.join(', ')}
   `
-  return langchainService.invoke(systemMessage, question, {}, Model.GPT_3_5_TURBO)
+  return langchainService.invoke(systemMessage, question)
 }
 
 const functionSchema: FunctionCall = {
