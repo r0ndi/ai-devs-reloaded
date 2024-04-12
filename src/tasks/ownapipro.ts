@@ -68,11 +68,11 @@ const functionSchema: FunctionCall = {
       type: {
         type: 'string',
         enum: ['question', 'knowledge'],
-        description: 'Type depentns of customer message. Question - question to answer, Knowledge - some knowledge about the user',
+        description: 'Type depends of customer message. Question - question to answer, Knowledge - some knowledge about the user',
       },
       message: {
         type: 'string',
-        description: 'Formated user message to question or knowladge'
+        description: 'Formatted user message to question or knowledge'
       }
     },
     required: ['type', 'message'],
