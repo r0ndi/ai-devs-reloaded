@@ -2,10 +2,11 @@
 Unofficial CLI for AI Devs
 
 ## Requirements
-1. Ai devs account [aidevs](https://www.aidevs.pl/)
-1. Openai account [openai](https://platform.openai.com/)
-1. Vector db [qdrant](https://qdrant.tech/documentation/quick-start/)
-1. API gateway [ngrok](https://ngrok.com/docs/getting-started/)
+1. Ai devs account [aidevs.pl](https://www.aidevs.pl/)
+1. Openai account [openai.com](https://platform.openai.com/)
+1. Vector db [qdrant.tech](https://qdrant.tech/documentation/quick-start/)
+1. API gateway [ngrok.com](https://ngrok.com/docs/getting-started/)
+1. RenderForm account [renderform.io](https://renderform.io/)
 1. Common sense
 
 ## Configuration and usage
