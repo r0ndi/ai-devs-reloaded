@@ -1,10 +1,9 @@
-import express, { Request, Response, Express } from 'express'
 import * as langchainService from '../services/langchain'
-import { FunctionCall } from '../types/local'
+import { createApiServer } from '../helpers/server'
 import { TaskResponse } from '../types/remote'
+import { FunctionCall } from '../types/local'
+import { Request, Response } from 'express'
 import { delay } from '../helpers/utils'
-import bodyParser from 'body-parser'
-import ngrok from '@ngrok/ngrok'
 
 type CategorizePharseArgs = { args: { type: string, message: string } }
 
@@ -12,27 +11,10 @@ const CONVERSATION_ENDPOINT = '/api/assistant/conversation'
 const customerKnowledge: string[] = []
 
 export async function handler(_: TaskResponse): Promise<string> {
-  const serverUrl = await createApiServer()
-  return `${serverUrl}${CONVERSATION_ENDPOINT}`
-}
+  const { url, server } = await createApiServer()
 
-async function createApiServer(): Promise<string> {
-  const app = await createExpressServer()
-  return createNgrokServer(app)
-}
-
-async function createExpressServer(): Promise<Express> {
-  const app = express()
-  app.use(bodyParser.json())
-  app.post(CONVERSATION_ENDPOINT, assistantConversation)
-  return app
-}
-
-async function createNgrokServer(app: Express): Promise<string> {
-  const session = await new ngrok.SessionBuilder().authtokenFromEnv().connect()
-  const listener = await session.httpEndpoint().listen()
-  ngrok.listen(app as any, listener)
-  return listener.url() || ''
+  server.post(CONVERSATION_ENDPOINT, assistantConversation)
+  return `${url}${CONVERSATION_ENDPOINT}`
 }
 
 async function assistantConversation(req: Request, res: Response): Promise<void> {

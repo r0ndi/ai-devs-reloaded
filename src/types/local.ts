@@ -1,4 +1,5 @@
 import { TaskResponse } from './remote'
+import { Express } from 'express'
 
 export type TaskResolver = (data: TaskResponse) => Promise<unknown>
 
@@ -37,3 +38,8 @@ export type FunctionCallResponse = {
   name: string
   args: Record<string, unknown>
 } | null
+
+export type Server = {
+  server: Express
+  url: string
+}
