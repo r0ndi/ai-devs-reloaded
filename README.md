@@ -7,6 +7,7 @@ Unofficial CLI for AI Devs
 1. Vector db [qdrant.tech](https://qdrant.tech/documentation/quick-start/)
 1. API gateway [ngrok.com](https://ngrok.com/docs/getting-started/)
 1. RenderForm account [renderform.io](https://renderform.io/)
+1. Serpapi account [serpapi.com](https://serpapi.com/)
 1. Common sense
 
 ## Configuration and usage

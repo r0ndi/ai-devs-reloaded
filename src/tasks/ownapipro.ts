@@ -1,6 +1,6 @@
 import express, { Request, Response, Express } from 'express'
 import * as langchainService from '../services/langchain'
-import { FunctionCall, Model } from '../types/local'
+import { FunctionCall } from '../types/local'
 import { TaskResponse } from '../types/remote'
 import { delay } from '../helpers/utils'
 import bodyParser from 'body-parser'
