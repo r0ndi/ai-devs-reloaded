@@ -4,13 +4,13 @@ import { createApiServer } from '../helpers/server'
 import { TaskResponse } from '../types/remote'
 import { Model } from '../types/local'
 
-const CONVERSATION_ENDPOINT = '/api/assistant/conversation'
+const ENDPOINT = '/api/assistant/conversation'
 
 export async function handler(_: TaskResponse): Promise<string> {
   const { url, server } = await createApiServer()
 
-  server.post(CONVERSATION_ENDPOINT, assistantConversation)
-  return `${url}${CONVERSATION_ENDPOINT}`
+  server.post(ENDPOINT, assistantConversation)
+  return `${url}${ENDPOINT}`
 }
 
 async function assistantConversation(req: Request, res: Response): Promise<void> {

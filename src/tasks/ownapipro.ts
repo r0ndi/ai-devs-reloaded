@@ -7,14 +7,14 @@ import { delay } from '../helpers/utils'
 
 type CategorizePharseArgs = { args: { type: string, message: string } }
 
-const CONVERSATION_ENDPOINT = '/api/assistant/conversation'
-const customerKnowledge: string[] = []
+const ENDPOINT = '/api/assistant/conversation'
+const localDatabase: string[] = []
 
 export async function handler(_: TaskResponse): Promise<string> {
   const { url, server } = await createApiServer()
 
-  server.post(CONVERSATION_ENDPOINT, assistantConversation)
-  return `${url}${CONVERSATION_ENDPOINT}`
+  server.post(ENDPOINT, assistantConversation)
+  return `${url}${ENDPOINT}`
 }
 
 async function assistantConversation(req: Request, res: Response): Promise<void> {
@@ -29,14 +29,14 @@ async function assistantConversation(req: Request, res: Response): Promise<void>
 }
 
 function saveToDatabase(data: string): string {
-  customerKnowledge.push(data)
-  return data
+  localDatabase.push(data)
+  return `Save to database: ${data}`
 }
 
 async function answerQuestion(question: string): Promise<string> {
   const systemMessage = `
     Answer the question very clearly, concise and in Polish based on provided context.
-    ### Context: ${customerKnowledge.join(', ')}
+    ### Context: ${localDatabase.join(', ')}
   `
   return langchainService.invoke(systemMessage, question)
 }
