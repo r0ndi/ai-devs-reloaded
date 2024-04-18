@@ -16,6 +16,19 @@ export async function sendCompletions(
   return (completion.choices[0].message.content || '').trim()
 }
 
+export async function sendCompletionsWithFineTuning(
+  systemContent: string, userContent: string, model: string,
+): Promise<string> {
+  const completion = await (new OpenAI()).chat.completions.create({
+    model,
+    messages: [
+      { role: 'system', content: systemContent },
+      { role: 'user', content: userContent },
+    ],
+  })
+  return (completion.choices[0].message.content || '').trim()
+}
+
 export async function moderateInputs(input: string[]): Promise<Moderation[]> {
   const { results } = await (new OpenAI()).moderations.create({ input })
   return results
